@@ -7,6 +7,7 @@ import breaker
 import info_cluster
 import communication_to_moblie
 import datetime
+import main_high_freq
 
 # -1.param initial
 total = 2000  # money
@@ -25,6 +26,7 @@ my_bank = initial_bank.Bank()
 # 1.selection first
 symbol_list = select_symbol.select_first(num,is_test)
 
+
 for symbol in symbol_list:
     # 2.finance Qualification assessment3
     result_fq = finance_qualification_assessment.quantization(symbol)
@@ -42,6 +44,10 @@ for symbol in symbol_list:
 
 # 6.selection second
 second_symbol_list, result = select_symbol.select_second(symbol_list, result)
+
+# 6.5 high freq check
+print(second_symbol_list)
+main_high_freq.main_high_freq(second_symbol_list)
 
 # 7.info cluster
 my_bank = info_cluster.info_cluster_f(my_bank, second_symbol_list, period, days_ago)
